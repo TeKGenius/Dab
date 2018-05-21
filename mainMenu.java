@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -8,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -20,6 +18,9 @@ import java.util.Random;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
+import java.awt.Label;
+import java.awt.Color;
 
 public class mainMenu extends JFrame {
 
@@ -52,21 +53,34 @@ public class mainMenu extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		JButton btnDab = new JButton("Dab");
+		btnDab.setBounds(5, 226, 513, 61);
 		btnDab.addActionListener(new ActionListener() {
+			int number = 0;
 			public void actionPerformed(ActionEvent arg0) {
 				Random generator = new Random();
-				String word = kidz.dab(generator.nextInt(8));
+				int choose = generator.nextInt(8);
+				while (choose == number) {
+					choose = generator.nextInt(8);
+				}
+				String word = kidz.dab(choose);
 				JOptionPane.showMessageDialog(null, word);
+				number = choose;
 			}
 		});
+		contentPane.setLayout(null);
 		
 		JLabel lblTekSimulator = new JLabel("Tek Simulator 2018", SwingConstants.CENTER);
+		lblTekSimulator.setBounds(87, 0, 359, 204);
 		lblTekSimulator.setFont(new Font("Roboto Condensed", Font.PLAIN, 36));
 		contentPane.add(lblTekSimulator);
 		contentPane.add(btnDab);
-	}
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(mainMenu.class.getResource("/resources/dab.jpg")));
+		label_1.setBounds(-193, 0, 711, 287);
+		contentPane.add(label_1);
+		}
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
